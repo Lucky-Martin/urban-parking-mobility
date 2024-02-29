@@ -1,10 +1,9 @@
 import time
-
 import cv2
 import numpy as np
-from shapely import Polygon
+from shapely.geometry import Polygon
 import json
-import requests
+# import requests  # Uncomment if you plan to use requests for API calls
 
 # Load YOLOv3 model and configuration
 net = cv2.dnn.readNet("./darknet/yolov3.weights", "./darknet/cfg/yolov3.cfg")
@@ -35,64 +34,61 @@ def is_car_in_spot(car_polygon, spot):
     spot_polygon = Polygon(spot_polygon_coords)
     return spot_polygon.intersects(car_polygon)
 
+# Initialize video capture from the RTSP stream
+cap = cv2.VideoCapture("rtsp://parking1admin:jaitpgvarna2000@192.168.1.14:554/stream1")
 
-# Initialize video capture from a video file or camera
-cap = cv2.VideoCapture("data/video.mp4")  # Replace with your video source
+# Initialize variables for managing frame capture interval
+frame_interval = 0.1  # Interval between frames in seconds
+next_frame_time = time.time() + frame_interval
 
 while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
+    current_time = time.time()
+    if current_time >= next_frame_time:
+        ret, frame = cap.read()
+        if not ret:
+            print("Failed to grab frame")
+            break
 
-    # Detect objects using YOLO
-    blob = cv2.dnn.blobFromImage(frame, 1 / 255.0, (416, 416), swapRB=True, crop=False)
-    net.setInput(blob)
-    output_layers = net.forward(net.getUnconnectedOutLayersNames())
+        # Detect objects using YOLO
+        blob = cv2.dnn.blobFromImage(frame, 1 / 255.0, (416, 416), swapRB=True, crop=False)
+        net.setInput(blob)
+        output_layers = net.forward(net.getUnconnectedOutLayersNames())
 
-    # Post-process YOLO output
-    boxes = []
-    confidences = []
-    class_ids = []
+        # Post-process YOLO output
+        for output in output_layers:
+            for detection in output:
+                scores = detection[5:]  # Class confidence scores start from the 6th element
+                class_id = np.argmax(scores)
+                confidence = scores[class_id]
 
-    # Reset all parking spots to available before checking
-    for spot in spots_format:
-        spot["status"] = "available"
+                if confidence > 0.5:
+                    center_x = int(detection[0] * frame.shape[1])
+                    center_y = int(detection[1] * frame.shape[0])
+                    width = int(detection[2] * frame.shape[1])
+                    height = int(detection[3] * frame.shape[0])
 
-    for output in output_layers:
-        for detection in output:
-            scores = detection[5:]  # Class confidence scores start from the 6th element
-            class_id = np.argmax(scores)
-            confidence = scores[class_id]
+                    x = int(center_x - width / 2)
+                    y = int(center_y - height / 2)
 
-            if confidence > 0.5:
-                center_x = int(detection[0] * frame.shape[1])
-                center_y = int(detection[1] * frame.shape[0])
-                width = int(detection[2] * frame.shape[1])
-                height = int(detection[3] * frame.shape[0])
+                    car_polygon = Polygon([(x, y), (x + width, y), (x + width, y + height), (x, y + height)])
+                    for spot in spots_format:
+                        if is_car_in_spot(car_polygon, spot):
+                            spot["status"] = "taken"
+                            cv2.rectangle(frame, (x, y), (x + width, y + height), (128, 0, 128), 2)
+                            break
+                    else:
+                        cv2.rectangle(frame, (x, y), (x + width, y + height), (0, 255, 0), 2)
+                    cv2.putText(frame, f"{confidence:.2f}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
-                x = int(center_x - width / 2)
-                y = int(center_y - height / 2)
+        # Update the time for the next frame capture
+        next_frame_time = current_time + frame_interval
 
-                car_polygon = Polygon([(x, y), (x + width, y), (x + width, y + height), (x, y + height)])
-                for spot in spots_format:
-                    if is_car_in_spot(car_polygon, spot):
-                        spot["status"] = "taken"
-                        cv2.rectangle(frame, (x, y), (x + width, y + height), (128, 0, 128), 2)
-                        break
-                else:
-                    cv2.rectangle(frame, (x, y), (x + width, y + height), (0, 255, 0), 2)
-                cv2.putText(frame, f"{confidence:.2f}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+        # Display the frame with detected objects
+        cv2.imshow("Parking system", frame)
 
-    print(spots_format)
-    print(apiUrl + 'parking/id1')
-    response = requests.patch(apiUrl + 'parking/id1', json={
-        "parkingData": spots_format
-    })
-    print(response.json())
-
-    # Display the frame with detected objects
-    cv2.imshow("Parking system", frame)
-    time.sleep(5)
+    # Implement the countdown timer for the UI or terminal display
+    countdown = int(next_frame_time - time.time())
+    print(f"Time until next frame: {countdown} seconds", end='\r')
 
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
