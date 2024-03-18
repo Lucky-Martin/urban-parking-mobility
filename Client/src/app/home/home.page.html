@@ -1,5 +1,11 @@
 <ion-content scroll="false">
-  <div class="map-container">
-    <capacitor-google-map id="map" #map data-tap-disabled="true"></capacitor-google-map>
-  </div>
+  <div id="map"></div>
+
+<!--  <div class="map-container">-->
+<!--&lt;!&ndash;    <capacitor-google-map id="map" #map data-tap-disabled="true"></capacitor-google-map>&ndash;&gt;-->
+<!--  </div>-->
+
+
+  <app-reset-map-button (mapReset)="refreshMap()"></app-reset-map-button>
+  <app-search-location (search)="onSearchLocation($event)"></app-search-location>
 </ion-content>

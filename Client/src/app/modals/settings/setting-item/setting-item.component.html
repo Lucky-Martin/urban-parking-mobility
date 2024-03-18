@@ -1,0 +1,9 @@
+<ion-item (click)="onAction()">
+  <div class="setting-name" [ngSwitch]="settingId">
+    <p *ngSwitchCase="Settings.Account">Излез от профил</p>
+    <p *ngSwitchCase="Settings.Vehicle">Добави автомобил</p>
+    <p *ngSwitchCase="Settings.ListVehicles">Списък с автомобили</p>
+    <p *ngSwitchCase="Settings.PayParking">Плати синя зона</p>
+  </div>
+  <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+</ion-item>

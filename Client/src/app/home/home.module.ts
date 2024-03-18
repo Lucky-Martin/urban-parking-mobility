@@ -6,6 +6,9 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import {HttpClientModule} from "@angular/common/http";
+import {SearchLocationComponent} from "./search-location/search-location.component";
+import {ListVehiclesModalComponent} from "../modals/settings/list-vehicles-modal/list-vehicles-modal.component";
+import {ResetMapButtonComponent} from "./reset-map-button/reset-map-button.component";
 
 @NgModule({
     imports: [
@@ -13,9 +16,9 @@ import {HttpClientModule} from "@angular/common/http";
         FormsModule,
         IonicModule,
         HomePageRoutingModule,
-        HttpClientModule
+        HttpClientModule,
     ],
-  declarations: [HomePage],
+  declarations: [HomePage, SearchLocationComponent, ListVehiclesModalComponent, ResetMapButtonComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePageModule {}

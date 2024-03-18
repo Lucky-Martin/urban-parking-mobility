@@ -24,3 +24,26 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.map-label {
+  display: flex!important;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: bold;
+}
+.map-label-taken {
+  display: flex!important;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  text-align: center;
+  background: rgba(255, 0, 0, 0.5);
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: bold;
+}

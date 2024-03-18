@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Вход</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-input type="email" label="E-mail"
+                   labelPlacement="floating" placeholder="E-mail..."
+                   formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" label="Парола"
+                   labelPlacement="floating" placeholder="Парола..."
+                   formControlName="password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" type="submit" size="large" class="ion-margin-top">Вход</ion-button>
+  </form>
+</ion-content>

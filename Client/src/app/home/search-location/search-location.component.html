@@ -1,0 +1,11 @@
+<ion-item class="search" lines="none">
+  <div class="main">
+    <ion-icon name="search-outline" slot="start" class="ion-margin-end"></ion-icon>
+    <ion-input placeholder="Търси локация" [value]="searchQuery" (ionChange)="onSearch($event)"></ion-input>
+    <div class="voice" slot="end" [ngSwitch]="listening">
+      <p class="ion-margin-end">|</p>
+      <ion-icon name="mic-outline" (click)="onStartListening()" *ngSwitchCase="false"></ion-icon>
+      <ion-icon name="mic-off-outline" (click)="onStopListening()" *ngSwitchCase="true"></ion-icon>
+    </div>
+  </div>
+</ion-item>

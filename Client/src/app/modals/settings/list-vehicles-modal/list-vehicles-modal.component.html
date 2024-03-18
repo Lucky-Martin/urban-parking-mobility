@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="close()">Назад</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loading-container" *ngIf="fetching">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+  <ion-list>
+    <p *ngIf="vehicles.length === 0 && !fetching" class="ion-text-center ion-margin-top">Няма намерени автомобили</p>
+    <ion-item *ngFor="let vehicle of vehicles;">
+      <ion-icon name="car-outline" class="ion-margin-end"></ion-icon>
+      <ion-label>{{vehicle.registrationNumber}}</ion-label>
+      <ion-button slot="end" fill="clear" (click)="onDelete(vehicle.id)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

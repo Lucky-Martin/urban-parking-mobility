@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Настройки</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="onClose()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p>Автомобил</p>
+  <div class="setting-container">
+    <app-setting-item [settingId]="Settings.Vehicle"></app-setting-item>
+    <app-setting-item [settingId]="Settings.ListVehicles"></app-setting-item>
+    <app-setting-item [settingId]="Settings.PayParking"></app-setting-item>
+  </div>
+  <p class="ion-margin-top">Профил</p>
+  <div class="setting-container">
+    <app-setting-item [settingId]="Settings.Account"></app-setting-item>
+  </div>
+</ion-content>

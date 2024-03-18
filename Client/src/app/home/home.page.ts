@@ -1,7 +1,9 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {environment} from "../../environments/environment";
-import {GoogleMap} from "@capacitor/google-maps";
+import * as leaf from 'leaflet';
 import {ParkingService} from "../services/parking.service";
+import {Geolocation} from '@capacitor/geolocation';
+import {Platform} from "@ionic/angular";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-home',
@@ -9,109 +11,152 @@ import {ParkingService} from "../services/parking.service";
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements AfterViewInit {
-  @ViewChild('map')
-  mapRef!: ElementRef<HTMLElement>;
-  newMap!: GoogleMap;
+  @ViewChild('map') mapRef!: ElementRef<HTMLElement>;
+  regions = [{
+    parkingId: "id1",
+    coordinates: [
+      [43.223899, 27.937917],
+      [43.223888, 27.938350],
+      [43.223795, 27.938350],
+      [43.223802, 27.937912]
+    ]
+  }, {
+    parkingId: "id2",
+    coordinates: [
+      [43.221660, 27.939140],
+      [43.221622, 27.940797],
+      [43.221271, 27.940783],
+      [43.221391, 27.939084]
+    ]
+  }]
   polygonCoordinates = [
     [
-      { lat: 43.223899, lng: 27.937917 },
-      { lat: 43.223888, lng: 27.938350 },
-      { lat: 43.223795, lng: 27.938350 },
-      { lat: 43.223802, lng: 27.937912 }
+      [43.223899, 27.937917],
+      [43.223888, 27.938350],
+      [43.223795, 27.938350],
+      [43.223802, 27.937912]
     ],
     [
-      { lat: 43.221660, lng: 27.939140 },
-      { lat: 43.221622, lng: 27.940797 },
-      { lat: 43.221271, lng: 27.940783 },
-      { lat: 43.221391, lng: 27.939084 }
+      [43.221660, 27.939140],
+      [43.221622, 27.940797],
+      [43.221271, 27.940783],
+      [43.221391, 27.939084]
     ],
-    // 43.076242, 27.863746
-    // 43.076675, 27.864551
-    // 43.075803, 27.865307
-    // 43.075432, 27.864537
     [
-      { lat: 43.076242, lng: 27.863746 },
-      { lat: 43.076675, lng: 27.864551 },
-      { lat: 43.075803, lng: 27.865307 },
-      { lat: 43.075432, lng: 27.864537 }
+      [43.076242, 27.863746],
+      [43.076675, 27.864551],
+      [43.075803, 27.865307],
+      [43.075432, 27.864537]
+    ],
+    [
+      [43.237361, 27.857417],
+      [43.237358, 27.858111],
+      [43.237024, 27.858087],
+      [43.237059, 27.857329]
     ]
-  ]
+  ];
+  private map!: leaf.Map;
+  private defaultZoom = 17;
 
-  constructor(private parkingService: ParkingService) {
+  constructor(private parkingService: ParkingService,
+              private platform: Platform,
+              private authService: AuthService) {
   }
 
   async ngAfterViewInit() {
+    if (this.platform.is('capacitor')) {
+      await Geolocation.requestPermissions();
+    }
+
     await this.createMap();
   }
 
+  toLeafletPath(coordinates: any) {
+    return coordinates.map((coord: any) => [coord.lat, coord.lng]);
+  }
+
   async createMap() {
-    this.newMap = await GoogleMap.create({
-      id: 'map',
-      element: this.mapRef.nativeElement,
-      apiKey: environment.MAPS_API_KEY,
-      config: {
-        center: {
-          lat: 43.22379,
-          lng: 27.93835,
-        },
-        zoom: 18,
-      },
-    });
 
-    // Create the polygon
-    const polygon = await this.newMap.addPolygons([
-      {
-        paths: this.polygonCoordinates,
-        strokeColor: 'orange', // Red outline color
-        strokeWeight: 2, // Outline width
-        fillColor: '#0000FF', // Blue fill color
-      }
-    ]);
+    const {coords} = await Geolocation.getCurrentPosition();
+    this.map = leaf.map('map', {zoomControl: false}).setView([coords.latitude, coords.longitude], this.defaultZoom);
 
-    await this.newMap.setOnMarkerClickListener(marker => {
-      this.parkingService.fetchParkingById('id1').subscribe((res: any) => {
-        if (res) {
-          let taken = res.parkingData.filter((space: any) => {
-            return space.status === "taken";
-          });
+    leaf.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 24,
+    }).addTo(this.map);
 
-          alert(`${taken.length}/${res.parkingData.length} места за паркиране`);
-        }
-      })
-    });
+    this.regions.forEach(async region => {
+      this.parkingService.fetchParkingById(region.parkingId).subscribe((res: any) => {
+        let leafletPath = this.toLeafletPath(region.coordinates);
+        //@ts-ignore
+        let polygon = leaf.polygon((region.coordinates), {
+          color: 'blue',
+          fillColor: 'lightblue',
+          fillOpacity: 0.5,
+        }).addTo(this.map);
 
-    await this.newMap.setOnPolygonClickListener(polygon => {
-      this.parkingService.fetchParkingById('id1').subscribe((res: any) => {
-        if (res) {
-          let taken = res.parkingData.filter((space: any) => {
-            return space.status === "taken";
-          });
+        // Calculate the center of the polygon
+        let center = polygon.getBounds().getCenter();
 
-          alert(`${taken.length}/${res.parkingData.length} места за паркиране`);
-        }
-      })
+        let availableSpaces = 0;
+        res.parkingData.forEach((parkingSpace: { status: string }) => {
+          if (parkingSpace.status === 'available') {
+            availableSpaces += 1;
+          }
+        });
+
+        // Add text in the center
+        leaf.marker(center, {
+          icon: leaf.divIcon({
+            className: availableSpaces > 0 ? 'map-label' : 'map-label-taken',
+            html: availableSpaces > 0 ? `Места ${availableSpaces}` : `Няма места`,
+            iconSize: [140, 48],
+          })
+        }).addTo(this.map);
+      });
     })
 
-    await this.newMap.enableCurrentLocation(true);
-    await this.newMap.enableTrafficLayer(true);
+    // this.polygonCoordinates.forEach((polygonCoord, index) => {
+    //
+    // });
+  }
 
-    for (let i = 0; i < this.polygonCoordinates.length; i++) {
-      // Calculate the center of the polygon
-      const centerLat = (this.polygonCoordinates[i][0].lat + this.polygonCoordinates[i][1].lat + this.polygonCoordinates[i][2].lat) / 3;
-      const centerLng = (this.polygonCoordinates[i][0].lng + this.polygonCoordinates[i][1].lng + this.polygonCoordinates[i][2].lng) / 3;
+  async refreshMap() {
+    const {coords} = await Geolocation.getCurrentPosition();
+    this.map.setView([coords.latitude, coords.longitude], this.defaultZoom)
+  }
 
-      // Add a text placeholder in the center of the polygon
-      await this.newMap.addMarker({
-        coordinate: {
-          lat: centerLat + 0.0001,
-          lng: centerLng - 0.00015,
-        },
-        iconSize: {
-          width: 64,
-          height: 64
-        },
-        iconUrl: "assets/icon/icon-parking.png"
-      });
+  calculatePolygonCenter(vertices: any[]) {
+    let latSum = 0, lngSum = 0;
+
+    for (const vertex of vertices) {
+      latSum += vertex.lat;
+      lngSum += vertex.lng;
     }
+
+    return {
+      lat: latSum / vertices.length,
+      lng: lngSum / vertices.length
+    };
+  }
+
+  async onSearchLocation(query: string) {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          const {lat, lon} = data[0];
+          this.map.setView([lat, lon], this.defaultZoom);
+        } else {
+          alert('Адресът не е намерен.');
+        }
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 }

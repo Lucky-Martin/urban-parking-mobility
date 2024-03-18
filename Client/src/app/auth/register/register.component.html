@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Регистрация</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <ion-list lines="none">
+      <ion-item *ngIf="false">
+        <ion-input type="text" label="Потребителско име"
+                   labelPlacement="floating" placeholder="Потребителско име..."
+                   formControlName="username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="email" label="E-mail"
+                   labelPlacement="floating" placeholder="E-mail..."
+                   formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" label="Парола"
+                   labelPlacement="floating" placeholder="Парола..."
+                   formControlName="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" label="Потвърди парола"
+                   labelPlacement="floating" placeholder="Потвърди парола..."
+                   formControlName="passwordConfirm"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" type="submit" size="large" class="ion-margin-top">Регистрирай се</ion-button>
+  </form>
+</ion-content>

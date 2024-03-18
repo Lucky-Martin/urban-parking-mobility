@@ -1,0 +1,25 @@
+<ion-content>
+  <div class="content-container">
+    <div class="flex-fix">
+      <img src="assets/icon/icon-parking.png" alt="">
+
+      <div class="text ion-text-center">
+        <h1>Parking Mobility</h1>
+        <h2>Твоя паркинг асистент</h2>
+      </div>
+
+      <div class="auth-buttons">
+        <ion-button expand="block" routerLink="register">Регистрация</ion-button>
+        <ion-button fill="outline" expand="block" routerLink="login">Вход</ion-button>
+
+        <p class="ion-no-margin ion-no-padding ion-margin-top ion-text-center">или</p>
+
+        <div class="providers">
+          <ion-button (click)="onGoogleAuth()" class="circle" color="google">
+            <ion-icon name="logo-google"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

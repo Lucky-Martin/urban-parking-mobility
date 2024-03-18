@@ -1,17 +1,18 @@
 import { CapacitorConfig } from '@capacitor/cli';
-import {environment} from "./src/environments/environment";
 
 const config: CapacitorConfig = {
-  appId: 'urban.parking.mobility',
+  appId: 'com.parkingmobility.app',
   appName: 'Parking Mobility',
   webDir: 'www',
   server: {
     androidScheme: 'https'
   },
   plugins: {
-    GoogleMaps: {
-      apiKey: environment.MAPS_API_KEY
-    }
+    GoogleAuth: {
+      scopes: ['profile', 'email'],
+      clientId: '982984420131-fm0adl20cjg8d4cesgncadfc6uv3t018.apps.googleusercontent.com',
+      iosClientId: '982984420131-o5709pbl22gfol043sefl93ho064m3ui.apps.googleusercontent.com'
+    },
   }
 };
 
