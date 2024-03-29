@@ -44,9 +44,20 @@ let minCount = 0;
 let maxCount = 0;
 let customMax = false;
 let customMin = false;
+let stop = false;
 
 router.get("/:parkingID/:spots", async (req: express.Request, res: express.Response) => {
     try {
+        if (req.params.spots === "true") {
+            stop = true;
+            res.status(200).send("ok stop");
+            return;
+        } else if (req.params.spots === "false") {
+            stop = false;
+            res.status(200).send("ok start");
+            return
+        }
+
         const spots = Number(req.params.spots);
         if (req.params.parkingID === "id1") {
             if (spots) {
