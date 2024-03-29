@@ -41,37 +41,42 @@ router.patch("/:parkingID", async (req: express.Request, res: express.Response) 
 });
 
 setInterval(async () => {
-    let randomNumber = Math.floor(Math.random() * 4) + 1;
+    let randomNumber = Math.floor(Math.random() * 8) - 4; // Generates a number between -4 and 3
+    if (randomNumber >= 0) {
+        randomNumber += 1; // Adjusts the range to be between -4 and 4, excluding 0
+    }
+
     const parkingId = "id1";
-    let initialSpots = 0;
 
     const queryHandler = new FetchParkingQueryHandler();
     const query = new FetchParkingQuery(parkingId);
     const res = await queryHandler.handle(query);
 
-    let availableSpotsObj = res.parkingData.filter(parkingSpace => {
-        return parkingSpace.status === 'available';
-    });
-    initialSpots = availableSpotsObj.length;
-    let newAvailableSpotsCount = availableSpotsObj.length + randomNumber;
-    if (newAvailableSpotsCount >= res.parkingData.length) {
-        newAvailableSpotsCount -= randomNumber;
-    }
-    let currentAvailable = res.parkingData.filter(spot => spot.status === 'available').length;
-    let spotsToChange = newAvailableSpotsCount - currentAvailable;
+    let availableSpotsObj = res.parkingData.filter(parkingSpace => parkingSpace.status === 'available');
+    let initialSpots = availableSpotsObj.length;
+    let newAvailableSpotsCount = initialSpots + randomNumber;
+
+// Ensure newAvailableSpotsCount is within valid range
+    newAvailableSpotsCount = Math.max(newAvailableSpotsCount, 0); // Prevent it from going below 0
+    newAvailableSpotsCount = Math.min(newAvailableSpotsCount, res.parkingData.length); // Prevent it from exceeding total spots
+
+    let spotsToChange = Math.abs(newAvailableSpotsCount - initialSpots); // Calculate spots to change
+    let statusToChange = randomNumber > 0 ? 'taken' : 'available'; // Determine status to change based on randomNumber
 
     res.parkingData.forEach(spot => {
-        if (spotsToChange > 0 && spot.status === 'taken') {
-            spot.status = 'available';
+        if (spotsToChange > 0 && spot.status === statusToChange) {
+            spot.status = statusToChange === 'taken' ? 'available' : 'taken';
             spotsToChange--;
         }
     });
+
     console.log(res.parkingData);
+
     const commandHandler = new UpdateParkingCommandHandler();
     const command = new UpdateParkingCommand("id1", res.parkingData);
     await commandHandler.handle(command);
 
-    console.log('prev:', initialSpots, 'current:', newAvailableSpotsCount)
+    console.log('prev:', initialSpots, 'current:', newAvailableSpotsCount);
 }, 5000)
 
 // cron.schedule('* * * * *', async () => {
