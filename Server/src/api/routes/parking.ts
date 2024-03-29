@@ -40,12 +40,40 @@ router.patch("/:parkingID", async (req: express.Request, res: express.Response) 
     }
 });
 
-router.patch("/id1/:spots", async (req: express.Request, res: express.Response) => {
+let minCount = 0;
+let maxCount = 0;
+let customMax = false;
+let customMin = false;
+
+router.get("/:parkingID/:spots", async (req: express.Request, res: express.Response) => {
     try {
         const spots = Number(req.params.spots);
-        if (req.params.spots) {
-            await changeAvailSpots(spots);
+        if (req.params.parkingID === "id1") {
+            if (spots) {
+                // console.log('change spots', spots)
+                minCount = 0;
+                maxCount = 0;
+                customMax = false;
+                customMin = false;
+                await changeAvailSpots(spots);
+                res.status(200).json({msg: `spots: ${spots}`})
+            }
         }
+    } catch (e: any) {
+        res.status(500).json({error: e.message});
+    }
+});
+
+router.get("/:parkingID/:spots/:max/:min", async (req: express.Request, res: express.Response) => {
+    try {
+        console.log(req.params)
+        minCount = Number(req.params.min);
+        maxCount = Number(req.params.max);
+        const respond = {msg: `maxCount: ${maxCount}, minCount: ${minCount}`};
+        customMax = true;
+        customMin = true;
+        await changeAvailSpots(Number(req.params.spots));
+        res.status(200).json(respond);
     } catch (e: any) {
         res.status(500).json({error: e.message});
     }
@@ -68,8 +96,11 @@ const changeAvailSpots = async (amount?: number) => {
     let newAvailableSpotsCount = initialSpots + randomNumber;
 
 // Ensure newAvailableSpotsCount is within valid range
-    newAvailableSpotsCount = Math.max(newAvailableSpotsCount, 0); // Prevent it from going below 0
-    newAvailableSpotsCount = Math.min(newAvailableSpotsCount, res.parkingData.length); // Prevent it from exceeding total spots
+    if (!customMax) {
+        maxCount = res.parkingData.length;
+    }
+    newAvailableSpotsCount = Math.max(newAvailableSpotsCount, minCount); // Prevent it from going below 0
+    newAvailableSpotsCount = Math.min(newAvailableSpotsCount, maxCount); // Prevent it from exceeding total spots
 
     if (amount) {
         newAvailableSpotsCount = amount;
@@ -85,7 +116,7 @@ const changeAvailSpots = async (amount?: number) => {
         }
     });
 
-    console.log(res.parkingData);
+    // console.log(res.parkingData);
 
     const commandHandler = new UpdateParkingCommandHandler();
     const command = new UpdateParkingCommand("id1", res.parkingData);

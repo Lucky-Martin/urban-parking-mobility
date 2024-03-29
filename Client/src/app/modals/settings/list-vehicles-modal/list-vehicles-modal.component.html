@@ -10,12 +10,12 @@
   <div class="loading-container" *ngIf="fetching">
     <ion-spinner name="crescent"></ion-spinner>
   </div>
-  <ion-list>
-    <p *ngIf="vehicles.length === 0 && !fetching" class="ion-text-center ion-margin-top">Няма намерени автомобили</p>
-    <ion-item *ngFor="let vehicle of vehicles;">
+  <ion-list *ngIf="!fetching">
+    <p *ngIf="vehicleService.inputs.length === 0" class="ion-text-center ion-margin-top">Няма намерени автомобили</p>
+    <ion-item *ngFor="let vehicle of vehicleService.inputs;">
       <ion-icon name="car-outline" class="ion-margin-end"></ion-icon>
-      <ion-label>{{vehicle.registrationNumber}}</ion-label>
-      <ion-button slot="end" fill="clear" (click)="onDelete(vehicle.id)">
+      <ion-label>{{vehicle.label}}</ion-label>
+      <ion-button slot="end" fill="clear" (click)="onDelete(vehicle.uid)">
         <ion-icon name="trash-outline"></ion-icon>
       </ion-button>
     </ion-item>

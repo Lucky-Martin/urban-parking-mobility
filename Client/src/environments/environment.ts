@@ -13,7 +13,7 @@ export const environment = {
     appId: "1:982984420131:web:635222392275684f68fa96",
     measurementId: "G-VT8DZ48GDH"
   },
-  API_URL: 'http://localhost:8000/api/'
+  API_URL: 'https://park-now.onrender.com/api/'
 };
 
 /*

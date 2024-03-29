@@ -1,9 +1,12 @@
 <ion-item (click)="onAction()">
   <div class="setting-name" [ngSwitch]="settingId">
-    <p *ngSwitchCase="Settings.Account">Излез от профил</p>
-    <p *ngSwitchCase="Settings.Vehicle">Добави автомобил</p>
-    <p *ngSwitchCase="Settings.ListVehicles">Списък с автомобили</p>
-    <p *ngSwitchCase="Settings.PayParking">Плати синя зона</p>
+    <p *ngSwitchCase="Settings.Account"><ion-icon name="log-out-outline" class="ion-margin-end"></ion-icon> Излез от профил</p>
+    <p *ngSwitchCase="Settings.Vehicle"><ion-icon name="add-outline" class="ion-margin-end"></ion-icon> Добави автомобил</p>
+    <p *ngSwitchCase="Settings.ListVehicles"><ion-icon name="list-outline" class="ion-margin-end"></ion-icon> Списък с автомобили</p>
+    <p *ngSwitchCase="Settings.PayParking"><ion-icon name="wallet-outline" class="ion-margin-end"></ion-icon> Плати синя зона</p>
   </div>
-  <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  <ion-icon *ngIf="settingId !== Settings.Premium" name="chevron-forward-outline" slot="end"></ion-icon>
+  <ion-toggle *ngIf="settingId === Settings.Premium"
+              [checked]="authService.isPremium"
+              (ionChange)="onChangeState()">Премиум абонамент</ion-toggle>
 </ion-item>

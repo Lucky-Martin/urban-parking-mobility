@@ -7,6 +7,7 @@ export enum Settings {
   Vehicle,
   ListVehicles,
   PayParking,
+  Premium
 }
 
 @Component({

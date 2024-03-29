@@ -7,25 +7,19 @@ import {VehicleService} from "../../../services/vehicle.service";
   templateUrl: './list-vehicles-modal.component.html',
   styleUrls: ['./list-vehicles-modal.component.scss'],
 })
-export class ListVehiclesModalComponent implements OnInit {
-  fetching = true;
-  vehicles: any[] = [];
+export class ListVehiclesModalComponent {
+  fetching = false;
 
   constructor(private modalController: ModalController,
-              private vehicleService: VehicleService) {
-  }
-
-  async ngOnInit() {
-    await this.fetchVehicles();
-  }
+              public vehicleService: VehicleService) { }
 
   async fetchVehicles() {
     this.fetching = true;
-    (await this.vehicleService.getUserVehicles())?.subscribe(vehicles => {
-      console.log(vehicles)
-      this.vehicles = vehicles;
+    await this.vehicleService.getUserVehicles();
+
+    setTimeout(() => {
       this.fetching = false;
-    })
+    }, 1000);
   }
 
   async close() {
@@ -33,7 +27,7 @@ export class ListVehiclesModalComponent implements OnInit {
   }
 
   async onDelete(registrationNumber: string) {
-    console.log(registrationNumber)
+    console.log(registrationNumber, 'delete')
     await this.vehicleService.deleteVehicle(registrationNumber);
     await this.fetchVehicles();
   }

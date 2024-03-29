@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {SMS} from "@awesome-cordova-plugins/sms";
-import {ParkingService} from "./parking.service";
-import {AlertController} from "@ionic/angular";
+import {AlertController, LoadingController} from "@ionic/angular";
 import {AuthService} from "./auth.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 
@@ -9,11 +8,14 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
   providedIn: 'root'
 })
 export class VehicleService {
+  inputs: any[] = [];
 
-  constructor(private parkingService: ParkingService,
+  constructor(private loadingController: LoadingController,
               private alertController: AlertController,
               private authService: AuthService,
-              private firestore: AngularFirestore) { }
+              private firestore: AngularFirestore) {
+    this.getUserVehicles();
+  }
 
   async addVehicle(registrationNumber: string) {
     let userId: string = this.authService.userId;
@@ -37,52 +39,67 @@ export class VehicleService {
       if (!userId) return;
     }
 
-    return this.firestore.collection('vehicles', ref => ref.where('userId', '==', this.authService.userId)).valueChanges();
+    this.firestore.collection('vehicles', ref => ref.where('userId', '==', this.authService.userId)).valueChanges().subscribe(res => {
+      this.inputs = [];
+
+      res?.forEach((vehicleData: any) => {
+        this.inputs.push({
+          label: vehicleData.registrationNumber,
+          type: 'radio',
+          value: vehicleData.registrationNumber,
+          uid: vehicleData.id
+        })
+      });
+    });
   }
 
   async deleteVehicle(vehicleId: string) {
     return this.firestore.doc(`vehicles/${vehicleId}`).delete();
   }
 
-  async listVehicles() {
-    (await this.getUserVehicles())?.subscribe(async res => {
-      let inputs: any = [];
+  async openVehicleList() {
+    const alert = await this.alertController.create({
+      header: 'Избери автомобил',
+      inputs: this.inputs,
+      buttons: [
+        {
+          text: 'Затвори',
+          role: 'dismiss'
+        },
+        {
+          text: 'Избери',
+          role: 'confirm',
+          handler: (data) => {
+            if (!data) {
+              return false;
+            }
+            if (typeof data !== 'string' && !data.values) {
+              return false;
+            }
 
-      res?.forEach((vehicleData: any) => {
-        inputs.push({
-          label: vehicleData.registrationNumber,
-          type: 'radio',
-          value: vehicleData.registrationNumber
-        })
-      });
-
-      const alert = await this.alertController.create({
-        header: 'Избери автомобил',
-        inputs,
-        buttons: [
-          {
-            text: 'Затвори',
-            role: 'dismiss'
-          },
-          {
-            text: 'Избери',
-            role: 'confirm'
+            return true;
           }
-        ]
-      });
+        }
+      ]
+    });
 
-      await alert.present();
+    await alert.present();
 
-      const {data, role} = await alert.onDidDismiss();
-      if (role === 'confirm') {
-        console.log(data)
-        await this.sendSms(data.values);
-      }
-    })
+    const {data, role} = await alert.onDidDismiss();
+    if (role === 'confirm') {
+      const loadingElement = await this.loadingController.create({
+        message: "Зарежда",
+        spinner: "crescent"
+      })
+
+      await loadingElement.present();
+      await this.sendSms(data.values);
+      await loadingElement.dismiss();
+    }
   }
 
   async sendSms(registrationNumber: string) {
-    const phoneNumber = '0000';
+    const phoneNumber = '1352';
 
     try {
       await SMS.send(phoneNumber, registrationNumber);

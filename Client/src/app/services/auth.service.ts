@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
 import {Platform} from "@ionic/angular";
@@ -6,24 +6,40 @@ import firebase from "firebase/compat/app";
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 import {Router} from "@angular/router";
 import capacitorConfig from "../../../capacitor.config";
+import {Subject} from "rxjs";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   userId!: string;
+  isAuth!: boolean;
+  premiumState: Subject<boolean> = new Subject<boolean>();
+  isPremium!: boolean;
 
   constructor(private afAuth: AngularFireAuth,
+              private afs: AngularFirestore,
               private platform: Platform,
               private router: Router) {
     this.platform.ready().then(this.initialise.bind(this));
   }
 
-  initialise() {
-    GoogleAuth.initialize({
-      clientId: capacitorConfig.plugins?.GoogleAuth.clientId,
-      grantOfflineAccess: true,
-      scopes: ['profile', 'email']
+  async initialise() {
+    if (this.platform.is('capacitor')) {
+      await GoogleAuth.initialize({
+        clientId: capacitorConfig.plugins?.GoogleAuth.clientId,
+        grantOfflineAccess: true,
+        scopes: ['profile', 'email']
+      });
+    }
+
+    this.afAuth.authState.subscribe(state => {
+      this.isAuth = !!state;
+    });
+
+    this.premiumState.subscribe(state => {
+      this.isPremium = state;
     });
   }
 
@@ -31,7 +47,8 @@ export class AuthService {
   async register(email: string, password: string) {
     try {
       const user = await this.afAuth.createUserWithEmailAndPassword(email, password);
-      await this.router.navigateByUrl('home');
+      await this.getUserId();
+      await this.router.navigateByUrl('home', {replaceUrl: true});
       return user.user;
     } catch (e: any) {
       throw new Error(e.message);
@@ -42,7 +59,8 @@ export class AuthService {
   async login(email: string, password: string) {
     try {
       const user = await this.afAuth.signInWithEmailAndPassword(email, password);
-      await this.router.navigateByUrl('home');
+      await this.getUserId();
+      await this.router.navigateByUrl('home', {replaceUrl: true});
       return user.user;
     } catch (e: any) {
       throw new Error(e.message);
@@ -59,7 +77,7 @@ export class AuthService {
     }
 
     await this.getUserId();
-    await this.router.navigateByUrl('home');
+    await this.router.navigateByUrl('home', {replaceUrl: true});
   }
 
   private async googleSignInMobile() {
@@ -81,10 +99,9 @@ export class AuthService {
   }
 
   // Sign out
-  logout() {
-    this.afAuth.signOut().then(() => {
-      this.router.navigateByUrl('auth');
-    })
+  async logout() {
+    await this.afAuth.signOut();
+    await this.router.navigateByUrl('auth', {replaceUrl: true});
   }
 
   getUserId() {

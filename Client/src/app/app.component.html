@@ -1,6 +1,6 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
-  <div class="navigation">
+  <div *ngIf="authService.isAuth" class="navigation">
     <ion-grid class="ion-text-center">
       <ion-row>
         <ion-col>
@@ -9,7 +9,7 @@
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button fill="clear" (click)="vehicleService.listVehicles()" color="tertiary">
+          <ion-button fill="clear" (click)="vehicleService.openVehicleList()" color="tertiary">
             <ion-icon name="wallet-outline"></ion-icon>
           </ion-button>
         </ion-col>

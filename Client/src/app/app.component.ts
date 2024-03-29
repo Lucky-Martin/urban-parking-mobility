@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {VehicleService} from "./services/vehicle.service";
 import {SettingsComponent} from "./modals/settings/settings.component";
 import {ModalController} from "@ionic/angular";
+import {AuthService} from "./services/auth.service";
+import {Geolocation} from "@capacitor/geolocation";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,10 @@ import {ModalController} from "@ionic/angular";
 })
 export class AppComponent {
   constructor(public vehicleService: VehicleService,
-              private modalController: ModalController) {}
+              public authService: AuthService,
+              private modalController: ModalController) {
+    this.initPermissions();
+  }
 
   async onOpenSettings() {
     const modal = await this.modalController.create({
@@ -18,5 +23,9 @@ export class AppComponent {
     });
 
     await modal.present();
+  }
+
+  async initPermissions() {
+    await Geolocation.requestPermissions();
   }
 }

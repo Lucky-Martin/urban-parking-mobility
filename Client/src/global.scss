@@ -47,3 +47,17 @@
   color: #ffffff;
   font-weight: bold;
 }
+.map-label-subscribe {
+  display: flex!important;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  text-align: center;
+  background: rgba(56, 128, 255, 0.5);
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: bold;
+}
+ion-searchbar input {
+  box-shadow: none!important;
+}

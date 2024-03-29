@@ -2,7 +2,6 @@ import {IParkingData} from "../../../db/models/ParkingModel";
 
 export class UpdateParkingCommand {
     constructor(public parkingID: string, public parkingData: IParkingData[]) {
-        console.log(parkingID, parkingData, !parkingData)
         if (!parkingID || parkingID === '') {
             throw new Error("ParkingID not provided");
         }
