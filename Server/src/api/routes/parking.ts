@@ -58,6 +58,9 @@ router.get("/:parkingID/:spots", async (req: express.Request, res: express.Respo
             return
         }
 
+        if (!stop) {
+            stop = false;
+        }
         const spots = Number(req.params.spots);
         if (req.params.parkingID === "id1") {
             if (spots) {
@@ -91,6 +94,8 @@ router.get("/:parkingID/:spots/:max/:min", async (req: express.Request, res: exp
 });
 
 const changeAvailSpots = async (amount?: number) => {
+    if (stop) return;
+
     let randomNumber = Math.floor(Math.random() * 8) - 4; // Generates a number between -4 and 3
     if (randomNumber >= 0) {
         randomNumber += 1; // Adjusts the range to be between -4 and 4, excluding 0
