@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "982984420131",
+    "project_id": "parking-mobility",
+    "storage_bucket": "parking-mobility.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982984420131:android:dd77f2a24a89b80368fa96",
+        "android_client_info": {
+          "package_name": "com.parkingmobility.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982984420131-ouqdbbgrl2jkmadqhvpa98jh28qesq09.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.parkingmobility.app",
+            "certificate_hash": "ed531b1faf9e129eed67786eb067c89fcdbf4796"
+          }
+        },
+        {
+          "client_id": "982984420131-fm0adl20cjg8d4cesgncadfc6uv3t018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtD1HqlQ4rY4txBvw9FIjfD286IUEunJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982984420131-fm0adl20cjg8d4cesgncadfc6uv3t018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "982984420131-o5709pbl22gfol043sefl93ho064m3ui.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.parkingmobility.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982984420131:android:aa76bf075837b10a68fa96",
+        "android_client_info": {
+          "package_name": "com.parknow.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982984420131-h5fo8ednog6gqr2kbmcgk0t0ierest95.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.parknow.app",
+            "certificate_hash": "ed531b1faf9e129eed67786eb067c89fcdbf4796"
+          }
+        },
+        {
+          "client_id": "982984420131-fm0adl20cjg8d4cesgncadfc6uv3t018.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtD1HqlQ4rY4txBvw9FIjfD286IUEunJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982984420131-fm0adl20cjg8d4cesgncadfc6uv3t018.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "982984420131-o5709pbl22gfol043sefl93ho064m3ui.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.parkingmobility.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,907 @@
+{
+  "_id": {
+    "$oid": "660724526208fd6258b6ef9d"
+  },
+  "id": "id1",
+  "parkingData": [
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "1"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "449"
+        },
+        {
+          "$numberInt": "502"
+        },
+        {
+          "$numberInt": "481"
+        },
+        {
+          "$numberInt": "547"
+        },
+        {
+          "$numberInt": "555"
+        },
+        {
+          "$numberInt": "543"
+        },
+        {
+          "$numberInt": "509"
+        },
+        {
+          "$numberInt": "500"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "2"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "557"
+        },
+        {
+          "$numberInt": "496"
+        },
+        {
+          "$numberInt": "588"
+        },
+        {
+          "$numberInt": "538"
+        },
+        {
+          "$numberInt": "660"
+        },
+        {
+          "$numberInt": "534"
+        },
+        {
+          "$numberInt": "612"
+        },
+        {
+          "$numberInt": "498"
+        }
+      ],
+      "status": "available",
+      "id": {
+        "$numberInt": "3"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "651"
+        },
+        {
+          "$numberInt": "489"
+        },
+        {
+          "$numberInt": "694"
+        },
+        {
+          "$numberInt": "529"
+        },
+        {
+          "$numberInt": "752"
+        },
+        {
+          "$numberInt": "525"
+        },
+        {
+          "$numberInt": "692"
+        },
+        {
+          "$numberInt": "485"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "4"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "5"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "6"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "7"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "8"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "9"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "10"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "available",
+      "id": {
+        "$numberInt": "11"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "available",
+      "id": {
+        "$numberInt": "12"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "available",
+      "id": {
+        "$numberInt": "13"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "available",
+      "id": {
+        "$numberInt": "14"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "15"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "16"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "17"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "available",
+      "id": {
+        "$numberInt": "18"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "available",
+      "id": {
+        "$numberInt": "19"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "20"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "21"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "available",
+      "id": {
+        "$numberInt": "22"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "available",
+      "id": {
+        "$numberInt": "23"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "24"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "25"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "26"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "taken",
+      "id": {
+        "$numberInt": "27"
+      }
+    },
+    {
+      "position": [
+        {
+          "$numberInt": "342"
+        },
+        {
+          "$numberInt": "508"
+        },
+        {
+          "$numberInt": "367"
+        },
+        {
+          "$numberInt": "558"
+        },
+        {
+          "$numberInt": "442"
+        },
+        {
+          "$numberInt": "550"
+        },
+        {
+          "$numberInt": "416"
+        },
+        {
+          "$numberInt": "507"
+        }
+      ],
+      "status": "available",
+      "id": {
+        "$numberInt": "28"
+      }
+    }
+  ],
+  "__v": {
+    "$numberInt": "0"
+  }
+}

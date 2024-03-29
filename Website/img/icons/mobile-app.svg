@@ -1,0 +1,11 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 44" width="49" height="44">
+	<title>asset-1-svg</title>
+	<defs>
+		<image width="384" height="512" id="img1" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzODQgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNS4xIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjQgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTE2IDY0QzE2IDI4LjcgNDQuNyAwIDgwIDBIMzA0YzM1LjMgMCA2NCAyOC43IDY0IDY0VjQ0OGMwIDM1LjMtMjguNyA2NC02NCA2NEg4MGMtMzUuMyAwLTY0LTI4LjctNjQtNjRWNjR6TTIyNCA0NDhhMzIgMzIgMCAxIDAgLTY0IDAgMzIgMzIgMCAxIDAgNjQgMHpNMzA0IDY0SDgwVjM4NEgzMDRWNjR6Ii8+PC9zdmc+"/>
+	</defs>
+	<style>
+	</style>
+	<g id="_001-www">
+		<use id="mobile-screen-button-solid" href="#img1" transform="matrix(.086,0,0,.086,8,0)"/>
+	</g>
+</svg>
