@@ -143,7 +143,7 @@ const changeAvailSpots = async (amount?: number) => {
 
 setInterval(async () => {
     await changeAvailSpots();
-}, 5000)
+}, 10 * 1000)
 
 export {router as parkingRouter};
 

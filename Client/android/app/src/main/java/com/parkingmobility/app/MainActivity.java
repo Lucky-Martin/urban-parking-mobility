@@ -1,4 +1,4 @@
-package com.parknow.app;
+package com.parkingmobility.app;
 
 import com.getcapacitor.BridgeActivity;
 
